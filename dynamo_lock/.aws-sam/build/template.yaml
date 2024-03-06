@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Testing
+
+  '
+Resources:
+  TestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: TestFunction
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.10
+      Timeout: 60
+      Architectures:
+      - x86_64
+      Environment:
+        Variables:
+          TEST: TESTING
+      Layers:
+      - arn:aws:lambda:eu-west-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:60
+    Metadata:
+      SamResourceId: TestFunction
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: lambda-dependencies
+      Description: Dependencies for Lambda
+      ContentUri: ../../libs
