@@ -15,7 +15,7 @@ conda activate test_ldl_env
 optional, ensure your python path is correct 
 
 ```bash
-$ export PATH="/Users/David/opt/anaconda3/envs/test_ldl_env/bin:$PATH"
+export PATH="/Users/David/opt/anaconda3/envs/test_ldl_env/bin:$PATH"
 ```
 
 ### Install requirements locally
