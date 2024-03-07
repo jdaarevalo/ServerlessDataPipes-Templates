@@ -1,6 +1,7 @@
 import os
 from datetime import date
-#from lambda_dynamo_lock import LambdaDynamoLock
+
+from lambda_dynamo_lock import LambdaDynamoLock
 
 from aws_lambda_powertools import Logger
 

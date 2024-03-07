@@ -21,7 +21,7 @@ Resources:
           TEST: "TESTING"
       Layers:
         - arn:aws:lambda:eu-west-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:60
-        #- !Ref libs
+        - !Ref libs
 
 ##########################################################################
 # Libs layer function
