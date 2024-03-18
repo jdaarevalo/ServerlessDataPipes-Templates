@@ -1,1 +1,0 @@
-lambda-dynamo-lock==0.1.3

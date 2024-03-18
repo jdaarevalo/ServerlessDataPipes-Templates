@@ -1,0 +1,13 @@
+{
+    "TableName": "lambda_executions",
+    "KeySchema": [
+      { "AttributeName": "date_to_run", "KeyType": "HASH" }
+    ],
+    "AttributeDefinitions": [
+      { "AttributeName": "date_to_run", "AttributeType": "S" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 10,
+      "WriteCapacityUnits": 10
+    }
+}
