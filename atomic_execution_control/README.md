@@ -54,3 +54,10 @@ aws dynamodb create-table --cli-input-json file://create_dynamodb_table.json --e
 ```bash
 aws dynamodb delete-table --table-name quality_score_survey_id_execution --endpoint-url http://localhost:8000
 ```
+
+Invoke lambda locally
+ 
+```bash
+sam build
+sam local invoke --event tests/events/event.json
+```

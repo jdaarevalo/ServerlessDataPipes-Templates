@@ -1,9 +1,7 @@
 import os
-from datetime import date
+
 from time import sleep
-
 from atomic_execution_control import AtomicExecutionControl
-
 from aws_lambda_powertools import Logger
 
 logger = Logger()
@@ -21,21 +19,19 @@ aec = AtomicExecutionControl(
 )
 
 def lambda_handler(event, context):
-    
-
     # Attempt to write a lock key for today's date
-    date_to_run = '2024-01-01'
+    date_to_run = event.get("date_to_run")
 
     # delete items in Dynamo for old executions
     aec.delete_items_finished_or_old(keys=[date_to_run], item_execution_valid_for=1)
 
     # write in Dynamo the date_to_run and block other executions to the same key
-    result = aec.write_atomically_a_key(key=date_to_run)
-
-    if result:
+    if aec.write_atomically_a_key(key=date_to_run):
         try:
             # If lock is acquired, perform your task
+            print("#"*50)
             print("Lock acquired, proceeding with task.")
+            print("#"*50)
             ## run_your_etl(date_to_run)
             sleep(10)
             # Remember to update the status to 'finished' after completing your task
@@ -46,7 +42,9 @@ def lambda_handler(event, context):
             raise e
     else:
         # If lock couldn't be acquired, another instance is already processing the task
+        print("%"*50)
         print("Task already in progress by another instance.")
+        print("%"*50)
         # wait until other instances with the same key finish
         aec.wait_other_instances_finish(keys=[date_to_run])
     
